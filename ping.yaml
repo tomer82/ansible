@@ -1,6 +1,9 @@
 ---
 
-- hosts: all
+- name: Ping
+  hosts: all
   gather_facts: false
   tasks:
+  - name: ping
     - ping:
+      win_ping:
