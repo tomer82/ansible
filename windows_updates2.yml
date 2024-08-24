@@ -1,0 +1,19 @@
+---
+- hosts: all
+  become_method: runas
+  serial: 1
+  tasks:
+    - name: Install All Critical and Security Updates
+      win_updates:
+        category_names:
+          - CriticalUpdates
+          - SecurityUpdates
+          - UpdateRollups
+        state: installed
+      register: update_result
+
+    - name: Reboot Host
+      win_reboot:
+        msg: "Reboot initiated by Ansible due to patching."
+        reboot_timeout: 720
+      when: update_result.reboot_required

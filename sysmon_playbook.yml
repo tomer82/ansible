@@ -1,0 +1,5 @@
+---
+  - hosts: windows
+    - name: Install Sysmon
+      import_role:
+        name: ansible-sysmon
